@@ -1,20 +1,24 @@
 <?php
 
-declare(strict_types=1);
+namespace Test;
 
-namespace Tests;
+use App\DirectorFactories;
+use App\ItemClassifier;
+use App\UpdaterFactory;
+use App\Item;
 
-use GildedRose\GildedRose;
-use GildedRose\Item;
-use PHPUnit\Framework\TestCase;
 
-class GildedRoseTest extends TestCase
-{
-    public function testFoo(): void
-    {
-        $items = [new Item('foo', 0, 0)];
-        $gildedRose = new GildedRose($items);
+class GildedRoseTest extends \PHPUnit\Framework\TestCase {
+    public function testFoo() {
+        $items      = [new Item("foo", 0, 0)];
+        $itemClassifier = new ItemClassifier();
+        $updaterFactory = new UpdaterFactory();
+        $directorFactories = new DirectorFactories($itemClassifier, $updaterFactory );
+
+        $gildedRose = new \App\GildedRose($items, $directorFactories);
         $gildedRose->updateQuality();
-        $this->assertSame('fixme', $items[0]->name);
+        $this->assertEquals("foo", $items[0]->name);
     }
 }
+
+

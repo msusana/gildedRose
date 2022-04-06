@@ -2,11 +2,8 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\GildedRose;
+use App\GildedRoseLegacy;
 use App\Item;
-use App\ItemClassifier;
-use App\UpdaterFactory;
-use App\DirectorFactories;
 
 echo "OMGHAI!\n";
 
@@ -23,11 +20,7 @@ $items = array(
     new Item('Conjured Mana Cake', 3, 6)
 );
 
-$itemClassifier = new ItemClassifier();
-$updaterFactory = new UpdaterFactory();
-$directorFactories = new DirectorFactories($itemClassifier, $updaterFactory );
-
-$app = new GildedRose($items,$directorFactories);
+$app = new GildedRoseLegacy($items);
 
 $days = 2;
 if (count($argv) > 1) {
